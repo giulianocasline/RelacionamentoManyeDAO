@@ -57,6 +57,11 @@ public class Pergunta {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public Pergunta(String descricao){
+		this.descricao=descricao;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

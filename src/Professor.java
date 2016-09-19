@@ -27,6 +27,12 @@ public class Professor {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public Professor(String nome, String ra){
+		this.nome=nome;
+		this.ra=ra;
+	}
+	
 
 	@Override
 	public int hashCode() {

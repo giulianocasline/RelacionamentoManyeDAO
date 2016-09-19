@@ -26,6 +26,11 @@ public class Curso {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public Curso(String descricao){
+		
+		this.descricao = descricao;
+	}
 
 	@Override
 	public int hashCode() {
@@ -34,6 +39,8 @@ public class Curso {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+	
+
 
 	@Override
 	public boolean equals(Object obj) {

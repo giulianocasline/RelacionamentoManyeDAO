@@ -28,6 +28,12 @@ public class Tipo {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public Tipo(String descricao){
+		this.descricao=descricao;
+		
+	}
+	
 
 	@Override
 	public int hashCode() {
