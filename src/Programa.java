@@ -10,8 +10,11 @@ public class Programa {
 
 	public static void main(String[] args) {
 		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("relacionamentomany");
-		EntityManager manager = factory.createEntityManager();
+		JPAUtil util = new JPAUtil();
+		
+		//criando todos os daos
+				NotaFiscalDAO notaFiscalDAO = new NotaFiscalDAO(util.criarEntityManager());
+				ItemDAO itemDAO = new ItemDAO(util.criarEntityManager());
 		
 		Tipo multiplaescolha = new Tipo("Multipla Escolha");
 		Tipo multiplaescolha2 = new Tipo("nota");
@@ -27,6 +30,20 @@ public class Programa {
 		Aluno aluno8 = new Aluno("nome8", "ra8");
 		Aluno aluno9 = new Aluno("nome9", "ra9");
 		Aluno aluno10 = new Aluno("nome10", "ra10");
+		
+		//salvando os objetos
+				util.abrirTransacao();
+				AlunoDAO.salvar(aluno1);
+				AlunoDAO.salvar(aluno2);
+				AlunoDAO.salvar(aluno3);
+				AlunoDAO.salvar(aluno4);
+				AlunoDAO.salvar(aluno5);
+				AlunoDAO.salvar(aluno6);
+				AlunoDAO.salvar(aluno7);
+				AlunoDAO.salvar(aluno8);
+				AlunoDAO.salvar(aluno9);
+				AlunoDAO.salvar(aluno10);
+				util.commitarTransacao();
 		
 
 		Professor professor1 = new Professor("professor1", "ra1");
@@ -77,20 +94,13 @@ public class Programa {
 
 		Disciplina disciplina1 = new Disciplina();
 		disciplina1.setDescricao("descricao");
-		disciplina1.setCurso(curso);
+		disciplina1.setCurso(curso1);
 		disciplina1.setProfessor(professor1);
 
 		Disciplina disciplina2 = new Disciplina();
 		disciplina2.setDescricao("descricao");
-		disciplina2.setCurso(curso);
+		disciplina2.setCurso(curso2);
 		disciplina2.setProfessor(professor2);
-
-		manager.getTransaction().begin();
-		manager.persist(disciplina1);
-		manager.persist(disciplina2);
-		manager.getTransaction().commit();
-
-	
 
 
 		Resposta resposta = new Resposta();
@@ -103,9 +113,6 @@ public class Programa {
 		resposta.setPerguta(perguntas);
 		
 
-		manager.getTransaction().begin();
-		manager.persist(resposta);
-		manager.getTransaction().commit();
 	}
 
 }
