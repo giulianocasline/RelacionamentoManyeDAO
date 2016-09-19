@@ -43,6 +43,11 @@ public class Avaliacao {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public Avaliacao(String descricao){
+		this.descricao=descricao;
+		
+	}
 
 	@Override
 	public int hashCode() {

@@ -67,26 +67,13 @@ public class Programa {
 		perguntas2.getOpcoesDeRespostas().add(opcao5);
 		perguntas2.setTipo(multiplaescolha);
 
-		manager.getTransaction().begin();
-		manager.persist(perguntas);
-		manager.persist(perguntas2);
-		manager.getTransaction().commit();
+		Avaliacao avaliacao = new Avaliacao("1");
 		
-
-
-
-		Avaliacao avaliacao = new Avaliacao();
-		avaliacao.setDescricao("1");
 		avaliacao.setPerguntas(new ArrayList<Pergunta>());
 		avaliacao.getPerguntas().add(perguntas);
 		avaliacao.getPerguntas().add(perguntas2);
 		
-		manager.getTransaction().begin();
-		manager.persist(avaliacao);
-		manager.getTransaction().commit();
 
-
-		
 
 		Disciplina disciplina1 = new Disciplina();
 		disciplina1.setDescricao("descricao");
