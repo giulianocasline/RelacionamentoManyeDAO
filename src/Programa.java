@@ -148,7 +148,7 @@ public class Programa {
 		resposta.setAvaliacao(avaliacao);
 		resposta.setDisciplina(disciplina1);
 		resposta.setOpcaoDeResposta(opcao1);
-		resposta.setPerguta(perguntas);
+		resposta.setPergunta(perguntas);
 		
 		respostaDAO.salvar(resposta);
 		

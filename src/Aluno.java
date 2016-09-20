@@ -1,14 +1,25 @@
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Aluno {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
 	private String ra;
 	private String nome;
+	
+	@OneToMany(mappedBy = "aluno")
+	private List<Resposta> respostas = new ArrayList<Resposta>();
+			
 	public Long getId() {
 		return id;
 	}
@@ -18,7 +29,6 @@ public class Aluno {
 	public String getRa() {
 		return ra;
 	}
-
 	public void setRa(String ra) {
 		this.ra = ra;
 	}
@@ -29,13 +39,36 @@ public class Aluno {
 		this.nome = nome;
 	}
 	
-	public Aluno (String nome, String ra){
-		this.nome = nome;
-		this.ra = ra;
-		
+	public Aluno(String nome,String ra){
+		this.nome=nome;
+		this.ra=ra;
+				
 	}
 	
+	public List<Resposta> getRespostas() {
+		return respostas;
+	}
+	public void setRespostas(List<Resposta> respostas) {
+		this.respostas = respostas;
+	}
 	
+	public Double media(Avaliacao avaliacao){
+		
+		Double media = 0d;
+		Double mediaAluno = 0d;
+		
+	for (Resposta alunoReposta : getRespostas()) {
+			
+		if(alunoReposta.getAvaliacao().equals(avaliacao)){
+				
+			mediaAluno =+ alunoReposta.getNota();
+		}
+			
+	}
+		 media = mediaAluno / getRespostas().size();
+			return media;
+	
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -61,5 +94,4 @@ public class Aluno {
 	}
 	
 	
-
 }
