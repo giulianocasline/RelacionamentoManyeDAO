@@ -13,11 +13,25 @@ public class Programa {
 		JPAUtil util = new JPAUtil();
 		
 		//criando todos os daos
-				NotaFiscalDAO notaFiscalDAO = new NotaFiscalDAO(util.criarEntityManager());
-				ItemDAO itemDAO = new ItemDAO(util.criarEntityManager());
+		AlunoDAO alunoDAO = new AlunoDAO(util.criarEntityManager());
+		AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO(util.criarEntityManager());
+		CursoDAO cursoDAO = new CursoDAO(util.criarEntityManager());
+		DisciplinaDAO disciplinaDAO = new DisciplinaDAO(util.criarEntityManager());
+		OpcaoDeRespostaDAO opcaoderespostaDAO = new OpcaoDeRespostaDAO(util.criarEntityManager());
+		PerguntaDAO perguntaDAO = new PerguntaDAO(util.criarEntityManager());
+		ProfessorDAO professorDAO = new ProfessorDAO(util.criarEntityManager());
+		RespostaDAO respostaDAO = new RespostaDAO(util.criarEntityManager());
+		TipoDAO tipoDAO = new TipoDAO(util.criarEntityManager());
+						
 		
 		Tipo multiplaescolha = new Tipo("Multipla Escolha");
 		Tipo multiplaescolha2 = new Tipo("nota");
+		
+		//salvando os objetos
+		util.abrirTransacao();
+		tipoDAO.salvar(multiplaescolha);
+		tipoDAO.salvar(multiplaescolha2);
+
 
 
 		Aluno aluno1 = new Aluno("nome1", "ra1");
@@ -32,27 +46,37 @@ public class Programa {
 		Aluno aluno10 = new Aluno("nome10", "ra10");
 		
 		//salvando os objetos
-				util.abrirTransacao();
-				AlunoDAO.salvar(aluno1);
-				AlunoDAO.salvar(aluno2);
-				AlunoDAO.salvar(aluno3);
-				AlunoDAO.salvar(aluno4);
-				AlunoDAO.salvar(aluno5);
-				AlunoDAO.salvar(aluno6);
-				AlunoDAO.salvar(aluno7);
-				AlunoDAO.salvar(aluno8);
-				AlunoDAO.salvar(aluno9);
-				AlunoDAO.salvar(aluno10);
-				util.commitarTransacao();
+	
+				alunoDAO.salvar(aluno1);
+				alunoDAO.salvar(aluno2);
+				alunoDAO.salvar(aluno3);
+				alunoDAO.salvar(aluno4);
+				alunoDAO.salvar(aluno5);
+				alunoDAO.salvar(aluno6);
+				alunoDAO.salvar(aluno7);
+				alunoDAO.salvar(aluno8);
+				alunoDAO.salvar(aluno9);
+				alunoDAO.salvar(aluno10);
+				
 		
 
 		Professor professor1 = new Professor("professor1", "ra1");
 		Professor professor2 = new Professor("professor2", "ra2");
 		
+		//salvando os objetos
+			
+				professorDAO.salvar(professor1);
+				professorDAO.salvar(professor2);
+			
+		
 
 		Curso curso1 = new Curso("disciplina1");
 		Curso curso2 = new Curso("disciplina2");
 		
+		//salvando os objetos
+			
+				cursoDAO.salvar(curso1);
+				cursoDAO.salvar(curso2);
 
 		
 		OpcaoDeResposta opcao1 = new OpcaoDeResposta("Otimo");
@@ -60,11 +84,16 @@ public class Programa {
 		OpcaoDeResposta opcao3 = new OpcaoDeResposta("Regular");
 		OpcaoDeResposta opcao4 = new OpcaoDeResposta("Ruim");
 		OpcaoDeResposta opcao5 = new OpcaoDeResposta("Pessimo");
-	
-
 		
-
-
+		//salvando os objetos
+				util.abrirTransacao();
+				opcaoderespostaDAO.salvar(opcao1);
+				opcaoderespostaDAO.salvar(opcao2);
+				opcaoderespostaDAO.salvar(opcao3);
+				opcaoderespostaDAO.salvar(opcao4);
+				opcaoderespostaDAO.salvar(opcao5);
+	
+	
 		
 		Pergunta perguntas = new Pergunta("descricao");
 		perguntas.setOpcoesDeRespostas(new ArrayList<OpcaoDeResposta>());
@@ -75,6 +104,7 @@ public class Programa {
 		perguntas.getOpcoesDeRespostas().add(opcao5);
 		perguntas.setTipo(multiplaescolha);
 		
+		
 		Pergunta perguntas2 = new Pergunta("descricao2");
 		perguntas2.setOpcoesDeRespostas(new ArrayList<OpcaoDeResposta>());
 		perguntas2.getOpcoesDeRespostas().add(opcao1);
@@ -83,14 +113,20 @@ public class Programa {
 		perguntas2.getOpcoesDeRespostas().add(opcao4);
 		perguntas2.getOpcoesDeRespostas().add(opcao5);
 		perguntas2.setTipo(multiplaescolha);
+		
+		//salvando os objetos
+				
+				perguntaDAO.salvar(perguntas);
+				perguntaDAO.salvar(perguntas2);
+			
 
 		Avaliacao avaliacao = new Avaliacao("1");
-		
 		avaliacao.setPerguntas(new ArrayList<Pergunta>());
 		avaliacao.getPerguntas().add(perguntas);
 		avaliacao.getPerguntas().add(perguntas2);
 		
-
+		avaliacaoDAO.salvar(avaliacao);
+		perguntaDAO.salvar(perguntas2);
 
 		Disciplina disciplina1 = new Disciplina();
 		disciplina1.setDescricao("descricao");
@@ -101,16 +137,25 @@ public class Programa {
 		disciplina2.setDescricao("descricao");
 		disciplina2.setCurso(curso2);
 		disciplina2.setProfessor(professor2);
+		
+		disciplinaDAO.salvar(disciplina1);
+		disciplinaDAO.salvar(disciplina2);
 
 
 		Resposta resposta = new Resposta();
-	    
 		resposta.setNota(10);
 		resposta.setAluno(aluno1);
 		resposta.setAvaliacao(avaliacao);
 		resposta.setDisciplina(disciplina1);
 		resposta.setOpcaoDeResposta(opcao1);
 		resposta.setPerguta(perguntas);
+		
+		respostaDAO.salvar(resposta);
+		
+		
+		util.commitarTransacao();
+		util.fecharFactory();
+		util.fecharManager();
 		
 
 	}
