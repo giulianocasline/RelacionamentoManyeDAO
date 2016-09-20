@@ -33,6 +33,8 @@ public class Professor {
 		this.ra=ra;
 	}
 	
+	public Professor(){}
+	
 
 	@Override
 	public int hashCode() {

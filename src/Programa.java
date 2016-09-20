@@ -153,21 +153,21 @@ public class Programa {
 		
 		respostaDAO.salvar(resposta);
 		
-		Aluno aluno = alunoDAO.encontrarPorId(50l);               
+		Aluno aluno = alunoDAO.encontrarPorId(42l);               
 		Avaliacao avaliacaoFinal = avaliacaoDAO.encontrarPorId(63l); 
 		
 		System.out.println("A média do aluno é: " + aluno.media(avaliacaoFinal));
 		
 		
-		Disciplina disciplina = disciplinaDAO.encontrarPorId(65l);
+		Disciplina disciplina = disciplinaDAO.encontrarPorId(64l);
 				
-		System.out.println("A média do aluno na disciplina é " + disciplina.media(avaliacao, disciplina));
+		System.out.println("A média do aluno na disciplina é " + disciplina.media(avaliacaoFinal, disciplina));
 		
-		System.out.println("A média do aluno na avaliação é " + avaliacao.media());
+		System.out.println("A média do aluno na avaliação é " + avaliacaoFinal.media());
 		
-		Pergunta pergunta = perguntaDAO.encontrarPorId(88l);
+		Pergunta pergunta = perguntaDAO.encontrarPorId(61l);
 		
-		System.out.println("A média do aluno na pergunta é " + pergunta.media(avaliacao));
+		System.out.println("A média do aluno na pergunta é " + pergunta.media(avaliacaoFinal));
 		
 		
 		

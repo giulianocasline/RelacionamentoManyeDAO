@@ -88,6 +88,9 @@ public class Pergunta {
 		this.descricao=descricao;
 	}
 
+	
+	public Pergunta(){}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

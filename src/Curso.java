@@ -31,6 +31,8 @@ public class Curso {
 		
 		this.descricao = descricao;
 	}
+	
+	public Curso(){}
 
 	@Override
 	public int hashCode() {

@@ -52,6 +52,10 @@ public class Aluno {
 		this.respostas = respostas;
 	}
 	
+	public Aluno(){
+		
+	}
+	
 	public Double media(Avaliacao avaliacao){
 		
 		Double media = 0d;

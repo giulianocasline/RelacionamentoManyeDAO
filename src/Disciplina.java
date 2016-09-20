@@ -66,6 +66,8 @@ public class Disciplina {
 	public void setRespostas(List<Resposta> respostas) {
 		this.respostas = respostas;
 	}
+	
+	public Disciplina(){}
 
 	
 	public Double media(Avaliacao avaliacao, Disciplina disciplina){

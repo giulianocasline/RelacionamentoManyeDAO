@@ -59,6 +59,8 @@ public class Avaliacao {
 	public Avaliacao(String descricao){
 		this.descricao=descricao;
 	}
+	
+	public Avaliacao(){}
 
 	public Double media(){
 		

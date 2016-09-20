@@ -96,5 +96,6 @@ public class Resposta {
 		this.opcaoDeResposta = opcaoDeResposta;
 	}
 	
+
 	
 }

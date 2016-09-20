@@ -34,6 +34,7 @@ public class Tipo {
 		
 	}
 	
+	public Tipo(){}
 
 	@Override
 	public int hashCode() {

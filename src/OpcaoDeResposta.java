@@ -42,6 +42,8 @@ public class OpcaoDeResposta {
 	public OpcaoDeResposta(String descricao){
 	this.descricao=descricao;	
 	}
+	
+	public OpcaoDeResposta(){}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
