@@ -9,9 +9,9 @@ public class ProfessorDAO {
 	}
 	
 	public void salvar(Professor professor){
-		manager.getTransaction().begin();
+	
 		manager.persist(professor);
-		manager.getTransaction().commit();		
+	
 	}
 
 }

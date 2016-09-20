@@ -9,9 +9,9 @@ public class CursoDAO {
 	}
 	
 	public void salvar(Curso curso){
-		manager.getTransaction().begin();
+
 		manager.persist(curso);
-		manager.getTransaction().commit();		
+		
 	}
 
 }

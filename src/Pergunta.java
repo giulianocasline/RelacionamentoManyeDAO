@@ -1,57 +1,37 @@
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Pergunta {
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private Long id;
+
 	private String descricao;
 	
-	@ManyToOne
-	private Tipo tipo;
-	
-	@ManyToMany
-	private List<OpcaoDeResposta> opcoesDeRespostas;
-	
 	@ManyToMany(mappedBy = "perguntas")
-	private List<Avaliacao> avaliacoes ;
-	
-	
-	@OneToMany(mappedBy = "pergunta")
-	private List<Resposta> respostas;
-	
-	public List<Resposta> getRespostas() {
-		return respostas;
-	}
+	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 
-	public void setRespostas(List<Resposta> respostas) {
-		this.respostas = respostas;
-	}
-
-	public Pergunta(){
-				
-	}
-
-	public Pergunta(String descricao,Tipo tipo) {		
-		this.descricao = descricao;
-		this.tipo = tipo;
-	}
+	@ManyToMany(cascade=CascadeType.ALL)
+	private List<OpcaoDeResposta> opcoesDeRespostas = new ArrayList<OpcaoDeResposta>();
 	
-	public long getId() {
+	@ManyToOne
+	private Tipo tipo; 
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -63,12 +43,12 @@ public class Pergunta {
 		this.descricao = descricao;
 	}
 
-	public Tipo getTipo() {
-		return tipo;
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacoes;
 	}
 
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
+	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;
 	}
 
 	public List<OpcaoDeResposta> getOpcoesDeRespostas() {
@@ -79,24 +59,29 @@ public class Pergunta {
 		this.opcoesDeRespostas = opcoesDeRespostas;
 	}
 
-	public List<Avaliacao> getAvaliacoes() {
-		return avaliacoes;
+	public Tipo getTipo() {
+		return tipo;
 	}
 
-	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-		this.avaliacoes = avaliacoes;
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
 	}
 	
-	public Double mediaPergunta(Avaliacao avaliacao){
-		Double valorNota = 0d;
-		Double mediap = 0d;
+	public Double media(Avaliacao avaliacao){
 		
-		for (Resposta resposta : getRespostas()) {
-			if(resposta.getAvaliacao().equals(avaliacao)){
-			valorNota += resposta.getNota();}
+		Double media = 0d;
+		
+		for (Resposta resposta : avaliacao.getRespostas()) {
+						
+			if(resposta.getPergunta().getId().equals(getId())){
+			media += resposta.getNota();	
+			
+			}
 		}
-		mediap = valorNota/ getRespostas().size();
-		return mediap;
+
+		return media / avaliacao.getRespostas().size();
+		
+		
 	}
 	
 	public Pergunta(String descricao){
@@ -107,7 +92,7 @@ public class Pergunta {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -120,7 +105,10 @@ public class Pergunta {
 		if (getClass() != obj.getClass())
 			return false;
 		Pergunta other = (Pergunta) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

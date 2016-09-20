@@ -22,13 +22,14 @@ public class Programa {
 		ProfessorDAO professorDAO = new ProfessorDAO(util.criarEntityManager());
 		RespostaDAO respostaDAO = new RespostaDAO(util.criarEntityManager());
 		TipoDAO tipoDAO = new TipoDAO(util.criarEntityManager());
-						
+		
+		util.abrirTransacao();				
 		
 		Tipo multiplaescolha = new Tipo("Multipla Escolha");
 		Tipo multiplaescolha2 = new Tipo("nota");
 		
 		//salvando os objetos
-		util.abrirTransacao();
+	
 		tipoDAO.salvar(multiplaescolha);
 		tipoDAO.salvar(multiplaescolha2);
 
@@ -86,7 +87,7 @@ public class Programa {
 		OpcaoDeResposta opcao5 = new OpcaoDeResposta("Pessimo");
 		
 		//salvando os objetos
-				util.abrirTransacao();
+			
 				opcaoderespostaDAO.salvar(opcao1);
 				opcaoderespostaDAO.salvar(opcao2);
 				opcaoderespostaDAO.salvar(opcao3);
@@ -152,10 +153,28 @@ public class Programa {
 		
 		respostaDAO.salvar(resposta);
 		
+		Aluno aluno = alunoDAO.encontrarPorId(50l);               
+		Avaliacao avaliacaoFinal = avaliacaoDAO.encontrarPorId(63l); 
+		
+		System.out.println("A média do aluno é: " + aluno.media(avaliacaoFinal));
+		
+		
+		Disciplina disciplina = disciplinaDAO.encontrarPorId(65l);
+				
+		System.out.println("A média do aluno na disciplina é " + disciplina.media(avaliacao, disciplina));
+		
+		System.out.println("A média do aluno na avaliação é " + avaliacao.media());
+		
+		Pergunta pergunta = perguntaDAO.encontrarPorId(88l);
+		
+		System.out.println("A média do aluno na pergunta é " + pergunta.media(avaliacao));
+		
+		
 		
 		util.commitarTransacao();
-		util.fecharFactory();
 		util.fecharManager();
+		util.fecharFactory();
+
 		
 
 	}

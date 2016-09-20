@@ -8,9 +8,9 @@ public class RespostaDAO {
 	}
 	
 	public void salvar(Resposta resposta){
-		manager.getTransaction().begin();
+
 		manager.persist(resposta);
-		manager.getTransaction().commit();		
+		
 	}
 
 }

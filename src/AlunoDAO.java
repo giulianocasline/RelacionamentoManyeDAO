@@ -8,10 +8,14 @@ public class AlunoDAO {
 		this.manager = manager;
 	}
 	
+	public Aluno encontrarPorId(Long id){
+		return manager.find(Aluno.class, id);
+	}
+	
 	public void salvar(Aluno aluno){
-		manager.getTransaction().begin();
+	
 		manager.persist(aluno);
-		manager.getTransaction().commit();		
+			
 	}
 	
 

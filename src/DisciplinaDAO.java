@@ -8,10 +8,16 @@ public class DisciplinaDAO {
 		this.manager = manager;
 	}
 	
+	public Disciplina encontrarPorId(Long id){
+		return manager.find(Disciplina.class, id);
+	}
+	
+
+	
 	public void salvar(Disciplina disciplina){
-		manager.getTransaction().begin();
+	
 		manager.persist(disciplina);
-		manager.getTransaction().commit();		
+		
 	}
 
 }

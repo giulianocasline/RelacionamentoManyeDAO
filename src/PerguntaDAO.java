@@ -8,10 +8,14 @@ public class PerguntaDAO {
 		this.manager = manager;
 	}
 	
+	public Pergunta encontrarPorId(Long id){
+		return manager.find(Pergunta.class, id);
+	}
+	
 	public void salvar(Pergunta pergunta){
-		manager.getTransaction().begin();
+	
 		manager.persist(pergunta);
-		manager.getTransaction().commit();		
+	
 	}
 
 }

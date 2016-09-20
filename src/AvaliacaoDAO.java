@@ -8,10 +8,14 @@ public class AvaliacaoDAO {
 		this.manager = manager;
 	}
 	
+	public Avaliacao encontrarPorId(Long id){
+		return manager.find(Avaliacao.class, id);
+	}
+	
 	public void salvar(Avaliacao avaliacao){
-		manager.getTransaction().begin();
+
 		manager.persist(avaliacao);
-		manager.getTransaction().commit();		
+	
 	}
 
 }

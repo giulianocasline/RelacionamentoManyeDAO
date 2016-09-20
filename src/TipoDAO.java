@@ -9,9 +9,9 @@ public class TipoDAO {
 	}
 	
 	public void salvar(Tipo tipo){
-		manager.getTransaction().begin();
+	
 		manager.persist(tipo);
-		manager.getTransaction().commit();		
+	
 	}
 
 }
